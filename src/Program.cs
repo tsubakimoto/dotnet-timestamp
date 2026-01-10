@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ConsoleAppFramework;
+
+var app = ConsoleApp.Create();
+app.Add("", () =>
+{
+    var unixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+    Console.WriteLine(unixTimestamp);
+});
+app.Run(args);
