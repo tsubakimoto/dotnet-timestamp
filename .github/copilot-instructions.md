@@ -17,4 +17,5 @@ This repository contains the source code for a C# global tool that works with ti
 
 ## Coding style
 
-- For C# coding style, see `.github/instructions/csharp.instructions.md`
+- For C# coding style, see `.github/instructions/csharp.instructions.md`.
+  - For the latest information on C#, use the MCP server `microsoft-docs`.
