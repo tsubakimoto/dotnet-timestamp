@@ -28,4 +28,4 @@ dotnet tool install -g dotnet-timestamp
 
 | オプション | 短縮形 | 必須 | デフォルト値 | 動作 |
 | --- | --- | --- | --- | --- |
-| `list` | `l` | No | - | 利用可能なタイムゾーンの一覧を表示します。`TimeZoneInfo.GetSystemTimeZones` メソッドの結果を使用します。 |
+| `list` | `l` | No | - | 利用可能なタイムゾーンの一覧を表示します。 `TimeZoneInfo.GetSystemTimeZones` メソッドの結果を使用します。 |
