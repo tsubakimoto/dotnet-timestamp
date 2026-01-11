@@ -6,7 +6,18 @@
     <RootNamespace>Tsubakimoto.Tools.Timestamp</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.2.0</VersionPrefix>
+    
+    <!-- グローバルツールとしてパッケージ化 -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>dtstamp</ToolCommandName>
+    <PackageId>dotnet-timestamp</PackageId>
+    <Authors>Tsubakimoto</Authors>
+    <Description>A .NET global tool for working with timestamps and timezones</Description>
+    <PackageTags>timestamp;timezone;dotnet-tool</PackageTags>
+    <PackageProjectUrl>https://github.com/tsubakimoto/dotnet-timestamp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tsubakimoto/dotnet-timestamp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
