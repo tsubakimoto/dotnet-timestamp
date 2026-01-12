@@ -6,7 +6,7 @@
     <RootNamespace>Tsubakimoto.Tools.Timestamp</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <VersionPrefix>0.2.0</VersionPrefix>
+    <VersionPrefix>0.3.0</VersionPrefix>
     
     <!-- グローバルツールとしてパッケージ化 -->
     <PackAsTool>true</PackAsTool>
