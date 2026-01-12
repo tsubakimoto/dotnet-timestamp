@@ -45,9 +45,9 @@ public sealed class NowCommandTests
     }
 
     [Fact]
-    public async Task Now_WithTimezoneOption_DisplaysTimestampInSpecifiedTimezone()
+    public async Task Now_WithUtcTimezone_DisplaysTimestampInUtc()
     {
-        var result = await TimestampCliRunner.RunAsync("now --timezone \"Tokyo Standard Time\"");
+        var result = await TimestampCliRunner.RunAsync($"now --timezone {TimeZoneHelper.Utc}");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -57,14 +57,31 @@ public sealed class NowCommandTests
         Assert.True(DateTimeOffset.TryParse(output, out var timestamp), 
             $"Output should be a valid timestamp, but was: {output}");
         
-        // Verify the offset is +09:00 for Tokyo Standard Time
-        Assert.Equal(TimeSpan.FromHours(9), timestamp.Offset);
+        // Verify the offset is +00:00 for UTC
+        Assert.Equal(TimeSpan.Zero, timestamp.Offset);
+    }
+
+    [Fact]
+    public async Task Now_WithJapanTimezone_DisplaysTimestampInJst()
+    {
+        var result = await TimestampCliRunner.RunAsync($"now --timezone \"{TimeZoneHelper.JapanStandardTime}\"");
+
+        Assert.False(result.TimedOut);
+        Assert.Equal(0, result.ExitCode);
+        Assert.False(string.IsNullOrWhiteSpace(result.StandardOutput), "Output should contain timestamp");
+        
+        var output = result.StandardOutput.Trim();
+        Assert.True(DateTimeOffset.TryParse(output, out var timestamp), 
+            $"Output should be a valid timestamp, but was: {output}");
+        
+        // Verify the offset is +09:00 for Japan Standard Time
+        Assert.Equal(TimeZoneHelper.JapanStandardTimeOffset, timestamp.Offset);
     }
 
     [Fact]
     public async Task Now_WithShortTimezoneOption_DisplaysTimestampInSpecifiedTimezone()
     {
-        var result = await TimestampCliRunner.RunAsync("now -z \"Eastern Standard Time\"");
+        var result = await TimestampCliRunner.RunAsync($"now -z \"{TimeZoneHelper.JapanStandardTime}\"");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -74,7 +91,7 @@ public sealed class NowCommandTests
     [Fact]
     public async Task Now_WithBothFormatAndTimezone_DisplaysFormattedTimestampInTimezone()
     {
-        var result = await TimestampCliRunner.RunAsync("now --format \"HH:mm\" --timezone \"UTC\"");
+        var result = await TimestampCliRunner.RunAsync($"now --format HH:mm --timezone {TimeZoneHelper.Utc}");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
