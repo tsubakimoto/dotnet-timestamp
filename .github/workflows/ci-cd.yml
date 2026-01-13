@@ -45,6 +45,14 @@ jobs:
   cd:
     needs: ci
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
-      - name: Placeholder deploy
-        run: echo "CD placeholder - replace with deployment script"
+      - name: Download package artifact
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: dotnet-timestamp-nuget
+          path: ./packages
+      - name: Publish to NuGet.org
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./packages/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json --skip-duplicate
