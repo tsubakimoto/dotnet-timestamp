@@ -6,7 +6,7 @@
     <RootNamespace>Tsubakimoto.Tools.Timestamp</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <VersionPrefix>0.3.0</VersionPrefix>
+    <VersionPrefix>0.3.1</VersionPrefix>
     
     <!-- グローバルツールとしてパッケージ化 -->
     <PackAsTool>true</PackAsTool>
@@ -18,7 +18,14 @@
     <PackageProjectUrl>https://github.com/tsubakimoto/dotnet-timestamp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tsubakimoto/dotnet-timestamp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="ConsoleAppFramework" Version="5.7.13">
