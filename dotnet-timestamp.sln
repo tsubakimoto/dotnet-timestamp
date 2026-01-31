@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11422.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timestamp.Test", "tests\Timestamp.Test\Timestamp.Test.csproj", "{AF31FF27-9940-4AD9-BC98-EBCB2D7BD576}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timestamp.E2E.Test", "tests\Timestamp.E2E.Test\Timestamp.E2E.Test.csproj", "{FA20D920-91B9-4685-A6AC-30FB2D0F44D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{45818792-A32E-9F2E-F68B-82253A7A8558}"
+	ProjectSection(SolutionItems) = preProject
+		spec\commandline.md = spec\commandline.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

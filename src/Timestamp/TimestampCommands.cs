@@ -1,4 +1,4 @@
-using ConsoleAppFramework;
+﻿using ConsoleAppFramework;
 
 namespace Tsubakimoto.Tools.Timestamp;
 
@@ -146,6 +146,30 @@ internal class TimestampCommands
         {
             Console.Error.WriteLine($"Error: 予期しないエラーが発生しました: {ex.Message}");
         }
+    }
+
+    /// <summary>
+    /// Unix command - Converts a datetime to Unix timestamp
+    /// </summary>
+    /// <param name="datetime">-t, Datetime to convert (parseable by DateTimeOffset). If not specified, uses current datetime.</param>
+    public void Unix(string? datetime = null)
+    {
+        DateTimeOffset targetDateTime;
+
+        if (string.IsNullOrWhiteSpace(datetime))
+        {
+            targetDateTime = DateTimeOffset.UtcNow;
+        }
+        else
+        {
+            if (!DateTimeOffset.TryParse(datetime, out targetDateTime))
+            {
+                Console.Error.WriteLine($"Error: 日時 '{datetime}' の解析に失敗しました。");
+                return;
+            }
+        }
+
+        Console.WriteLine(targetDateTime.ToUnixTimeSeconds());
     }
 
     /// <summary>
