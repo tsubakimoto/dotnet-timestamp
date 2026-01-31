@@ -8,9 +8,9 @@ public sealed class UnixCommandTests
     [Fact]
     public async Task Unix_WithoutOptions_DisplaysCurrentUnixTimestamp()
     {
-        var beforeRun = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        var beforeRun = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         var result = await TimestampCliRunner.RunAsync("unix");
-        var afterRun = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        var afterRun = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
         Assert.False(result.TimedOut, "Command should not timeout");
         Assert.Equal(0, result.ExitCode);
@@ -66,7 +66,7 @@ public sealed class UnixCommandTests
         Assert.Equal(0, result.ExitCode);
 
         var output = result.StandardOutput.Trim();
-        var expected = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.FromHours(9)).ToUnixTimeSeconds();
+        var expected = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.FromHours(9)).ToUnixTimeMilliseconds();
         Assert.Equal(expected.ToString(), output);
     }
 }
