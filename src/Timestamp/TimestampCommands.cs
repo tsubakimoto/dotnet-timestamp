@@ -61,6 +61,33 @@ internal class TimestampCommands
     }
 
     /// <summary>
+    /// Convert unix command - Converts a Unix timestamp to datetime
+    /// </summary>
+    /// <param name="unixTimestamp">-u, Unix timestamp (milliseconds) to convert</param>
+    /// <param name="format">-m, Output timestamp format (default: 'o')</param>
+    [Command("convert unix")]
+    public void ConvertUnix([Argument] long unixTimestamp, string format = "o")
+    {
+        try
+        {
+            var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(unixTimestamp);
+            Console.WriteLine(dateTimeOffset.ToString(format));
+        }
+        catch (FormatException)
+        {
+            Console.Error.WriteLine($"Error: フォーマット '{format}' が無効です。");
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Console.Error.WriteLine($"Error: Unixタイムスタンプ '{unixTimestamp}' は有効な範囲外です。");
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error: 予期しないエラーが発生しました: {ex.Message}");
+        }
+    }
+
+    /// <summary>
     /// 指定された日時を別のタイムゾーンに変換して表示します。
     /// </summary>
     /// <param name="datetime">変換する日時（DateTimeOffset で解析可能な形式）</param>
