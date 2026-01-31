@@ -151,7 +151,7 @@ internal class TimestampCommands
     /// <summary>
     /// Unix command - Converts a datetime to Unix timestamp
     /// </summary>
-    /// <param name="datetime">-t, Datetime to convert (parseable by DateTimeOffset). If not specified, uses current datetime.</param>
+    /// <param name="datetime">-d, Datetime to convert (parseable by DateTimeOffset). If not specified, uses current datetime.</param>
     public void Unix(string? datetime = null)
     {
         DateTimeOffset targetDateTime;
@@ -169,7 +169,7 @@ internal class TimestampCommands
             }
         }
 
-        Console.WriteLine(targetDateTime.ToUnixTimeSeconds());
+        Console.WriteLine(targetDateTime.ToUnixTimeMilliseconds());
     }
 
     /// <summary>

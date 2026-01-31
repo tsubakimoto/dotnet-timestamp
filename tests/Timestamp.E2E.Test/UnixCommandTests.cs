@@ -38,7 +38,7 @@ public sealed class UnixCommandTests
     [Fact]
     public async Task Unix_WithShortDatetimeOption_DisplaysUnixTimestamp()
     {
-        var result = await TimestampCliRunner.RunAsync("unix -t 2000-01-01T00:00:00Z");
+        var result = await TimestampCliRunner.RunAsync("unix -d 2000-01-01T00:00:00Z");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);

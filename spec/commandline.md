@@ -1,4 +1,4 @@
-# dotnet-timestamp コマンドライン仕様
+﻿# dotnet-timestamp コマンドライン仕様
 
 ## インストール方法
 ```bash
@@ -43,4 +43,4 @@ dotnet tool install -g dotnet-timestamp
 
 | オプション | 短縮形 | 必須 | デフォルト値 | 動作 |
 | --- | --- | --- | --- | --- |
-| `datetime` | `t` | No | - | Unixタイムスタンプに変換する日時を指定します。C# の `DateTimeOffset` クラスで解析可能な形式で指定します。指定しない場合は現在の日時が使用されます。 |
+| `datetime` | `d` | No | - | Unixタイムスタンプに変換する日時を指定します。C# の `DateTimeOffset` クラスで解析可能な形式で指定します。指定しない場合は現在の日時が使用されます。 |
