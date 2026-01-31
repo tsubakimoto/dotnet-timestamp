@@ -49,13 +49,14 @@ internal class TimestampCommands
     }
 
     /// <summary>
-    /// Convert command - Converts a datetime from one timezone to another
+    /// Timezone convert command - Converts a datetime from one timezone to another
     /// </summary>
     /// <param name="datetime">-d, Datetime to convert (parseable by DateTimeOffset)</param>
     /// <param name="from">-f, Source timezone identifier</param>
     /// <param name="to">-t, Target timezone identifier</param>
     /// <param name="format">-m, Output timestamp format (default: 'o')</param>
-    public void Convert(string datetime, string from, string to, string format = "o")
+    [Command("timezone convert")]
+    public void TimezoneConvert(string datetime, string from, string to, string format = "o")
     {
         ConvertDateTime(datetime, from, to, format);
     }

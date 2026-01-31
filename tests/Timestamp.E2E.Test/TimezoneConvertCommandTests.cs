@@ -1,15 +1,15 @@
-namespace Tsubakimoto.Tools.Timestamp.E2E.Test;
+﻿namespace Tsubakimoto.Tools.Timestamp.E2E.Test;
 
 /// <summary>
-/// E2E tests for the 'convert' command.
+/// E2E tests for the 'timezone convert' command.
 /// </summary>
-public sealed class ConvertCommandTests
+public sealed class TimezoneConvertCommandTests
 {
     [Fact]
-    public async Task Convert_FromUtcToJapan_ConvertsTimezone()
+    public async Task TimezoneConvert_FromUtcToJapan_ConvertsTimezone()
     {
         var result = await TimestampCliRunner.RunAsync(
-            $"convert --datetime \"2026-01-12T12:00:00\" --from {TimeZoneHelper.Utc} --to \"{TimeZoneHelper.JapanStandardTime}\"");
+            $"timezone convert --datetime \"2026-01-12T12:00:00\" --from {TimeZoneHelper.Utc} --to \"{TimeZoneHelper.JapanStandardTime}\"");
 
         Assert.False(result.TimedOut, "Command should not timeout");
         Assert.Equal(0, result.ExitCode);
@@ -26,10 +26,10 @@ public sealed class ConvertCommandTests
     }
 
     [Fact]
-    public async Task Convert_FromJapanToUtc_ConvertsTimezone()
+    public async Task TimezoneConvert_FromJapanToUtc_ConvertsTimezone()
     {
         var result = await TimestampCliRunner.RunAsync(
-            $"convert -d \"2026-01-12T00:00:00\" -f \"{TimeZoneHelper.JapanStandardTime}\" -t {TimeZoneHelper.Utc}");
+            $"timezone convert -d \"2026-01-12T00:00:00\" -f \"{TimeZoneHelper.JapanStandardTime}\" -t {TimeZoneHelper.Utc}");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -43,10 +43,10 @@ public sealed class ConvertCommandTests
     }
 
     [Fact]
-    public async Task Convert_WithCustomFormat_ConvertsAndFormatsTimestamp()
+    public async Task TimezoneConvert_WithCustomFormat_ConvertsAndFormatsTimestamp()
     {
         var result = await TimestampCliRunner.RunAsync(
-            $"convert --datetime \"2026-01-12T12:00:00\" --from {TimeZoneHelper.Utc} --to \"{TimeZoneHelper.JapanStandardTime}\" --format yyyy-MM-dd");
+            $"timezone convert --datetime \"2026-01-12T12:00:00\" --from {TimeZoneHelper.Utc} --to \"{TimeZoneHelper.JapanStandardTime}\" --format yyyy-MM-dd");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -57,10 +57,10 @@ public sealed class ConvertCommandTests
     }
 
     [Fact]
-    public async Task Convert_WithShortFormatOption_ConvertsAndFormatsTimestamp()
+    public async Task TimezoneConvert_WithShortFormatOption_ConvertsAndFormatsTimestamp()
     {
         var result = await TimestampCliRunner.RunAsync(
-            $"convert -d \"2026-01-12T12:00:00\" -f {TimeZoneHelper.Utc} -t \"{TimeZoneHelper.JapanStandardTime}\" -m HH:mm:ss");
+            $"timezone convert -d \"2026-01-12T12:00:00\" -f {TimeZoneHelper.Utc} -t \"{TimeZoneHelper.JapanStandardTime}\" -m HH:mm:ss");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -73,10 +73,10 @@ public sealed class ConvertCommandTests
     }
 
     [Fact]
-    public async Task Convert_WithUtcRoundTrip_MaintainsTimestamp()
+    public async Task TimezoneConvert_WithUtcRoundTrip_MaintainsTimestamp()
     {
         var result = await TimestampCliRunner.RunAsync(
-            $"convert --datetime \"2026-01-12T23:00:00\" --from {TimeZoneHelper.Utc} --to {TimeZoneHelper.Utc}");
+            $"timezone convert --datetime \"2026-01-12T23:00:00\" --from {TimeZoneHelper.Utc} --to {TimeZoneHelper.Utc}");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -90,10 +90,10 @@ public sealed class ConvertCommandTests
     }
 
     [Fact]
-    public async Task Convert_WithIso8601Input_ConvertsCorrectly()
+    public async Task TimezoneConvert_WithIso8601Input_ConvertsCorrectly()
     {
         var result = await TimestampCliRunner.RunAsync(
-            $"convert --datetime \"2026-01-12T12:00:00+09:00\" --from \"{TimeZoneHelper.JapanStandardTime}\" --to {TimeZoneHelper.Utc}");
+            $"timezone convert --datetime \"2026-01-12T12:00:00+09:00\" --from \"{TimeZoneHelper.JapanStandardTime}\" --to {TimeZoneHelper.Utc}");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -104,5 +104,25 @@ public sealed class ConvertCommandTests
         
         Assert.Equal(3, timestamp.Hour);
         Assert.Equal(TimeSpan.Zero, timestamp.Offset);
+    }
+
+    [Fact]
+    public async Task TimezoneConvert_WithInvalidFromTimezone_DisplaysError()
+    {
+        var result = await TimestampCliRunner.RunAsync(
+            $"timezone convert --datetime \"2026-01-12T12:00:00\" --from InvalidTimezone --to {TimeZoneHelper.Utc}");
+
+        Assert.False(result.TimedOut);
+        Assert.Contains("Error:", result.StandardError);
+    }
+
+    [Fact]
+    public async Task TimezoneConvert_WithInvalidToTimezone_DisplaysError()
+    {
+        var result = await TimestampCliRunner.RunAsync(
+            $"timezone convert --datetime \"2026-01-12T12:00:00\" --from {TimeZoneHelper.Utc} --to InvalidTimezone");
+
+        Assert.False(result.TimedOut);
+        Assert.Contains("Error:", result.StandardError);
     }
 }

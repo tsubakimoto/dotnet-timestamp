@@ -24,15 +24,23 @@ dotnet tool install -g dotnet-timestamp
 	```
 - Convert a timestamp between time zones:
 	```bash
-	dtstamp convert --datetime "2024-09-01T12:00:00" --from UTC --to America/New_York --format "yyyy-MM-dd HH:mm:ss zzz"
+	dtstamp timezone convert --datetime "2024-09-01T12:00:00" --from UTC --to America/New_York --format "yyyy-MM-dd HH:mm:ss zzz"
 	```
-- Convert a datetime to Unix timestamp (milli seconds since 1970-01-01 00:00:00 UTC):
+- Convert a datetime to Unix timestamp (milliseconds since 1970-01-01 00:00:00 UTC):
 	```bash
 	dtstamp unix --datetime "2024-09-01T12:00:00Z"
 	```
 - Get the current Unix timestamp:
 	```bash
 	dtstamp unix
+	```
+- Convert a Unix timestamp to datetime:
+	```bash
+	dtstamp convert unix 1725192000000
+	```
+- Convert a Unix timestamp to datetime with custom format:
+	```bash
+	dtstamp convert unix 1725192000000 --format "yyyy-MM-dd HH:mm:ss"
 	```
 
 The default command runs `now`.
