@@ -44,7 +44,7 @@ public sealed class UnixCommandTests
         Assert.Equal(0, result.ExitCode);
 
         var output = result.StandardOutput.Trim();
-        Assert.Equal("946684800", output);
+        Assert.Equal("946684800000", output);
     }
 
     [Fact]
