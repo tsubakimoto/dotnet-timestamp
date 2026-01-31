@@ -1,4 +1,4 @@
-# dotnet-timestamp
+﻿# dotnet-timestamp
 
 `dotnet-timestamp` is a .NET global tool that prints timestamps and converts them across time zones from the command line. The installed command name is `dtstamp`.
 
@@ -25,6 +25,14 @@ dotnet tool install -g dotnet-timestamp
 - Convert a timestamp between time zones:
 	```bash
 	dtstamp convert --datetime "2024-09-01T12:00:00" --from UTC --to America/New_York --format "yyyy-MM-dd HH:mm:ss zzz"
+	```
+- Convert a datetime to Unix timestamp (seconds since 1970-01-01 00:00:00 UTC):
+	```bash
+	dtstamp unix --datetime "2024-09-01T12:00:00Z"
+	```
+- Get the current Unix timestamp:
+	```bash
+	dtstamp unix
 	```
 
 The default command runs `now`.
