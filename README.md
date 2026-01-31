@@ -1,5 +1,7 @@
 ﻿# dotnet-timestamp
 
+[![NuGet status](https://img.shields.io/nuget/v/dotnet-timestamp.svg?style=flat&logo=nuget)](https://www.nuget.org/packages/dotnet-timestamp)
+
 `dotnet-timestamp` is a .NET global tool that prints timestamps and converts them across time zones from the command line. The installed command name is `dtstamp`.
 
 ## Install
