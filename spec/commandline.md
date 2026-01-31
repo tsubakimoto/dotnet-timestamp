@@ -45,10 +45,10 @@ dotnet tool install -g dotnet-timestamp
 | --- | --- | --- | --- | --- |
 | `datetime` | `d` | No | - | Unixタイムスタンプに変換する日時を指定します。C# の `DateTimeOffset` クラスで解析可能な形式で指定します。指定しない場合は現在の日時が使用されます。 |
 
-### `convert unix`
+### `unix convert`
 指定されたUnixタイムスタンプを日時に変換して表示します。
 
 | オプション | 短縮形 | 必須 | デフォルト値 | 動作 |
 | --- | --- | --- | --- | --- |
-| `unix-timestamp` | `u` | Yes | - | 変換するUnixタイムスタンプを指定します。 |
+| `timestamp` | `t` | Yes | - | 変換するUnixタイムスタンプを指定します。 |
 | `format` | `m` | No | `o` | 出力する日時のフォーマットを指定します。C# の標準的な日時フォーマット文字列を使用します。 |

@@ -1,14 +1,14 @@
 ﻿namespace Tsubakimoto.Tools.Timestamp.E2E.Test;
 
 /// <summary>
-/// E2E tests for the 'convert unix' command.
+/// E2E tests for the 'unix convert' command.
 /// </summary>
-public sealed class ConvertUnixCommandTests
+public sealed class UnixConvertCommandTests
 {
     [Fact]
-    public async Task ConvertUnix_WithZero_ReturnsUnixEpoch()
+    public async Task UnixConvert_WithZero_ReturnsUnixEpoch()
     {
-        var result = await TimestampCliRunner.RunAsync("convert unix 0");
+        var result = await TimestampCliRunner.RunAsync("unix convert 0");
 
         Assert.False(result.TimedOut, "Command should not timeout");
         Assert.Equal(0, result.ExitCode);
@@ -27,10 +27,10 @@ public sealed class ConvertUnixCommandTests
     }
 
     [Fact]
-    public async Task ConvertUnix_WithKnownTimestamp_ReturnsCorrectDatetime()
+    public async Task UnixConvert_WithKnownTimestamp_ReturnsCorrectDatetime()
     {
         // 946684800000 milliseconds = 2000-01-01T00:00:00Z
-        var result = await TimestampCliRunner.RunAsync("convert unix 946684800000");
+        var result = await TimestampCliRunner.RunAsync("unix convert 946684800000");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -46,10 +46,10 @@ public sealed class ConvertUnixCommandTests
     }
 
     [Fact]
-    public async Task ConvertUnix_WithCustomFormat_FormatsOutput()
+    public async Task UnixConvert_WithCustomFormat_FormatsOutput()
     {
         // 946684800000 milliseconds = 2000-01-01T00:00:00Z
-        var result = await TimestampCliRunner.RunAsync("convert unix 946684800000 --format yyyy-MM-dd");
+        var result = await TimestampCliRunner.RunAsync("unix convert 946684800000 --format yyyy-MM-dd");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -59,10 +59,10 @@ public sealed class ConvertUnixCommandTests
     }
 
     [Fact]
-    public async Task ConvertUnix_WithShortFormatOption_FormatsOutput()
+    public async Task UnixConvert_WithShortFormatOption_FormatsOutput()
     {
         // 946684800000 milliseconds = 2000-01-01T00:00:00Z
-        var result = await TimestampCliRunner.RunAsync("convert unix 946684800000 -m HH:mm:ss");
+        var result = await TimestampCliRunner.RunAsync("unix convert 946684800000 -m HH:mm:ss");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -72,10 +72,10 @@ public sealed class ConvertUnixCommandTests
     }
 
     [Fact]
-    public async Task ConvertUnix_WithNegativeTimestamp_ReturnsDateBeforeEpoch()
+    public async Task UnixConvert_WithNegativeTimestamp_ReturnsDateBeforeEpoch()
     {
         // -86400000 milliseconds = 1969-12-31T00:00:00Z (one day before epoch)
-        var result = await TimestampCliRunner.RunAsync("convert unix -86400000");
+        var result = await TimestampCliRunner.RunAsync("unix convert -86400000");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -90,14 +90,14 @@ public sealed class ConvertUnixCommandTests
     }
 
     [Fact]
-    public async Task ConvertUnix_RoundTrip_ReturnsOriginalTimestamp()
+    public async Task UnixConvert_RoundTrip_ReturnsOriginalTimestamp()
     {
         // First, convert a known datetime to unix timestamp
         var knownDatetime = new DateTimeOffset(2024, 6, 15, 12, 30, 45, TimeSpan.Zero);
         var unixTimestamp = knownDatetime.ToUnixTimeMilliseconds();
 
-        // Then convert back using convert unix
-        var result = await TimestampCliRunner.RunAsync($"convert unix {unixTimestamp}");
+        // Then convert back using unix convert
+        var result = await TimestampCliRunner.RunAsync($"unix convert {unixTimestamp}");
 
         Assert.False(result.TimedOut);
         Assert.Equal(0, result.ExitCode);
@@ -115,9 +115,9 @@ public sealed class ConvertUnixCommandTests
     }
 
     [Fact]
-    public async Task ConvertUnix_WithInvalidFormat_DisplaysError()
+    public async Task UnixConvert_WithInvalidFormat_DisplaysError()
     {
-        var result = await TimestampCliRunner.RunAsync("convert unix 0 --format \"%%\"");
+        var result = await TimestampCliRunner.RunAsync("unix convert 0 --format \"%%\"");
 
         Assert.False(result.TimedOut);
         Assert.Contains("Error:", result.StandardError);

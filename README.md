@@ -36,11 +36,11 @@ dotnet tool install -g dotnet-timestamp
 	```
 - Convert a Unix timestamp to datetime:
 	```bash
-	dtstamp convert unix 1725192000000
+	dtstamp unix convert 1725192000000
 	```
 - Convert a Unix timestamp to datetime with custom format:
 	```bash
-	dtstamp convert unix 1725192000000 --format "yyyy-MM-dd HH:mm:ss"
+	dtstamp unix convert 1725192000000 --format "yyyy-MM-dd HH:mm:ss"
 	```
 
 The default command runs `now`.

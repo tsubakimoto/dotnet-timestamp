@@ -62,16 +62,16 @@ internal class TimestampCommands
     }
 
     /// <summary>
-    /// Convert unix command - Converts a Unix timestamp to datetime
+    /// Unix convert command - Converts a Unix timestamp to datetime
     /// </summary>
-    /// <param name="unixTimestamp">-u, Unix timestamp (milliseconds) to convert</param>
+    /// <param name="timestamp">-t, Unix timestamp (milliseconds) to convert</param>
     /// <param name="format">-m, Output timestamp format (default: 'o')</param>
-    [Command("convert unix")]
-    public void ConvertUnix([Argument] long unixTimestamp, string format = "o")
+    [Command("unix convert")]
+    public void UnixConvert([Argument] long timestamp, string format = "o")
     {
         try
         {
-            var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(unixTimestamp);
+            var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
             Console.WriteLine(dateTimeOffset.ToString(format));
         }
         catch (FormatException)
@@ -80,7 +80,7 @@ internal class TimestampCommands
         }
         catch (ArgumentOutOfRangeException)
         {
-            Console.Error.WriteLine($"Error: Unixタイムスタンプ '{unixTimestamp}' は有効な範囲外です。");
+            Console.Error.WriteLine($"Error: Unixタイムスタンプ '{timestamp}' は有効な範囲外です。");
         }
         catch (Exception ex)
         {
